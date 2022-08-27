@@ -1,0 +1,22 @@
+#
+# Installation is assumed to be under /opt/dremio
+#
+[Unit]
+Description=Dremio Daemon Server
+Documentation=https://docs.dremio.com
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=dremio
+Group=dremio
+RuntimeDirectory=dremio
+ExecStart=/opt/dremio/bin/dremio start-fg
+Restart=on-failure
+# Set maximum number of file descriptors Dremio can open.
+# Dremio requires a large number to work correctly.
+LimitNOFILE=65536
+
+
+[Install]
+WantedBy=multi-user.target

@@ -117,8 +117,6 @@ Dremio元数据服务于两种工作负载类型:
 | 2000 | 每数据集20列,1000片,刷新间隔30分钟 | 2MB/s |
 | 2000 | 每数据集20列,1000片,刷新间隔10分钟 | 3MB/s |
 
-
-
 #### 分布式存储
 
 分布式存储缓存位置包含加速器(accelerator),表(tables),任务结果(job results),下载和上传数据;    
@@ -134,22 +132,76 @@ Dremio元数据服务于两种工作负载类型:
 
 
 
+### 部署环境
+
+- 配置内容
+
+服务高可用
+缓存
+存储
+网络,带宽,交互端口
+日志
+磁盘,内存容量分配
+
+当前生产配置:
+内存 总量125G
+磁盘 600G/+1.5T/data
+
+dremio-env
+```
+DREMIO_MAX_MEMORY_SIZE_MB=102400M
+DREMIO_MAX_HEAP_MEMORY_SIZE_MB=32768M
+DREMIO_JAVA_SERVER_EXTRA_OPTS="-Dsaffron.default.charset=UTF-16LE -Dsaffron.default.nationalcharset=UTF-16LE -Dsaffron.default.nationalcharset=UTF-16LE"
+```
+DREMIO_JAVA_SERVER_EXTRA_OPTS编码配置有重复
+
+
+dremio.conf master
+```
+paths: {
+  # the local path for dremio to store data.
+  local: "/data/dremio/data"
+
+  # the distributed path Dremio data including job results, downloads, uploads, etc
+  dist: "pdfs://"${paths.local}"/pdfs"
+}
+
+services: {
+  coordinator.enabled: true,
+  coordinator.master.enabled: true,
+  executor.enabled: true
+}
+registration.publish-host: "10.10.4.72"
+zookeeper: "10.16.8.99:2181,10.16.8.100:2181,10.16.8.105:2181"
+```
+
+
+zookeeper 3台
+- 高可用要求
+
+配置dremio服务,外部元数据存储,外部zookeeper集群    
+启动协调者节点     
+启动执行者节点    
 
 
 
 
 
 
+### 扩展阅读
+
+OpenId 实现SSO
 
 
 
 
+### 问题
+
+只有一个主协调者节点可对外服务,怎么实现负载均衡??
+72master节点同时配置执行者角色,与官方推荐配置不符合?    
 
 
 
-
-
-
-
+https://docs.dremio.com/software/deployment/dremio-config/
 
 
