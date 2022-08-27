@@ -121,6 +121,22 @@ https://docs.dremio.com/software/deployment/distributed-storage/
 
 
 
+### 部署环境
+
+zookeeper 3台
+- 高可用要求
+
+配置dremio服务,外部元数据存储,外部zookeeper集群    
+启动协调者节点     
+启动执行者节点    
+
+
+
+
+
+### 问题
+
+只有一个主协调者节点可对外服务,怎么实现负载均衡??
 
 
 
