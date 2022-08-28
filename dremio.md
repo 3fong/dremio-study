@@ -202,6 +202,6 @@ OpenId 实现SSO
 
 
 
-https://docs.dremio.com/software/advanced-administration/monitoring/
+https://docs.dremio.com/software/advanced-administration/job-queues/
 
 
