@@ -202,6 +202,6 @@ OpenId 实现SSO
 
 
 
-https://docs.dremio.com/software/deployment/dremio-config/
+https://docs.dremio.com/software/advanced-administration/monitoring/
 
 
