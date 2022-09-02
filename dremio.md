@@ -183,8 +183,22 @@ zookeeper 3台
 启动协调者节点     
 启动执行者节点    
 
+### job profile
 
+The following table describes each job state:
 
+| Job State	Description | PENDING	Wait to be scheduled by the command pool, the pool of threads available to the coordinator. |
+| ---- | ---- |
+| METADATA_RETRIEVAL | Parse the SQL command, check permissions, and retrieve schema information from the KVStore. |
+| PLANNING | Physical and logical planning, Match data reflections and substituions, prune partitions, and map the query to a queue using WLM rules. |
+| ENGINE_START | Wait for engine start. Currently applies only to AWS Edition deployments. |
+| QUEUED | Each queue has a limited number of concurrent jobs. Queries wait for an in-progress job to complete when the number of in-progress jobs is greater than the limit. |
+| EXECUTION PLANNING | Select executor nodes to run the query, retrieve split metadata from the KVStore for the pruned partitions, parallelize the fragments, assign fragments among the executor nodes, and assign splits to fragments taking into account data locality. |
+| STARTING | Send RPCs to each executor that contains information about the fragments assigned to it. |
+| RUNNING | Wait for executor nodes to execute and complete the fragments assigned to them. Typically, queries spend most of their time in this job state. |
+| COMPLETED | Query successfully completed. |
+| CANCELLED | Query was cancelled either by a user or an internal issue, such as insufficient memory or heap. |
+| FAILED | Query failed due to an error. |
 
 
 
@@ -202,6 +216,6 @@ OpenId 实现SSO
 
 
 
-https://docs.dremio.com/software/advanced-administration/job-queues/
+https://docs.dremio.com/software/jobs/job-metrics-desc/
 
 
