@@ -200,6 +200,67 @@ The following table describes each job state:
 | CANCELLED | Query was cancelled either by a user or an internal issue, such as insufficient memory or heap. |
 | FAILED | Query failed due to an error. |
 
+### 分析profiles
+
+- Considerations
+A major consideration is whether a thread is in a running, blocked and waiting for data (or to send data), or sleeping state. A thread is usually sleeping if the thread is ready to run but another thread is currently using the CPU.
+
+- Blocked State
+A thread is usually in a blocked state for one of the following reasons:
+
+It’s waiting on some data from another thread (a child phase in the tree).
+It’s trying to send data to another thread (a parent phase) but the receiving thread isn’t responding. The receiving thread may be too slow or overwhelmed with work. What occurs is that the sending thread is forced to block until the receiver is able to receive the data.
+
+- Network Activities
+Network activities are tracked as part of the blocked metric.
+
+> If a thread is blocked, nothing much can be done.
+If a thread is sleeping, ensure that task.on_idle_load_shed is set to true.
+
+- Troubleshooting
+The following general areas should be reviewed:
+
+> Errors
+Performance
+
+- Errors
+To troubleshoot errors, consider the following:
+
+> Dremio nodes – Determine whether the coordinator or executor nodes are impacted.
+Verbose error
+Out of memory
+Incorrect results
+No results
+
+- Performance
+To troubleshoot performance, consider the following:
+
+> Planning time versus execution time
+Number of threads which impact process time
+Row count versus rows
+Blocked versus sleep
+Setup time version wait time
+Operator metrics (contact support@dremio.com)
+
+- Downloaded Profile Data
+After downloading your jobs profile data, the following files provide valuable information.
+
+> header.json – This file provides the full list of Dremio coordinators and executors, data sets, and sources. This information is useful when you are using REST calls.
+profile_attempt_0.json – This file helps with troubleshooting out of memory and wrong results issues. Note that the start and end time of query is provided in EPOCH format. See the Epoch Converter utility for converting query time.
+
+### 反射
+
+Data Reflections are maintained in a high-performance columnar representation based on Apache Parquet and Apache Arrow, utilizing advanced compression techniques such as dictionary encoding, run-length encoding, and delta encoding.
+
+系统反射表:select * from sys.reflections
+
+- dremio查询核心技术: Apache Arrow Flight
+
+Apache Arrow Flight is a general-purpose, client-server framework for simplifying high-performance transportation of large datasets over network interfaces.
+
+Apache Arrow Flight SQL is a new API developed by the Apache Arrow community for interacting with SQL databases. It provides Arrow Flight a way to execute queries, create prepared statements, and fetch metadata about the supported SQL dialect, available types, defined tables.
+
+Both are part of Apache Arrow, an open-source software development platform for building high-performance applications that process and transport large data sets. A critical component of Apache Arrow is its in-memory columnar format, a standardized, language-agnostic specification for representing structured, table-like datasets in-memory.
 
 
 ### 扩展阅读
@@ -216,6 +277,6 @@ OpenId 实现SSO
 
 
 
-https://docs.dremio.com/software/jobs/job-metrics-desc/
+https://docs.dremio.com/software/developing-client-apps/arrow-flight/
 
 
