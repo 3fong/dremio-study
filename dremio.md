@@ -183,6 +183,11 @@ zookeeper 3台
 启动协调者节点     
 启动执行者节点    
 
+### 使用
+
+dataset: 分为物理数据集和虚拟数据集.物理数据集是将文件转化为数据表,支持外部查询操作;虚拟数据集是基于一个或多个物理数据集建立的查询表,类似于视图,它是对所有人可见的,通过space进行分类.
+space是共享空间,建立space的数据表用于用户间数据共享.
+
 ### job profile
 
 The following table describes each job state:
@@ -261,6 +266,9 @@ Apache Arrow Flight is a general-purpose, client-server framework for simplifyin
 Apache Arrow Flight SQL is a new API developed by the Apache Arrow community for interacting with SQL databases. It provides Arrow Flight a way to execute queries, create prepared statements, and fetch metadata about the supported SQL dialect, available types, defined tables.
 
 Both are part of Apache Arrow, an open-source software development platform for building high-performance applications that process and transport large data sets. A critical component of Apache Arrow is its in-memory columnar format, a standardized, language-agnostic specification for representing structured, table-like datasets in-memory.
+
+
+
 
 
 ### 扩展阅读
