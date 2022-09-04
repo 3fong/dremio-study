@@ -267,7 +267,8 @@ Apache Arrow Flight SQL is a new API developed by the Apache Arrow community for
 
 Both are part of Apache Arrow, an open-source software development platform for building high-performance applications that process and transport large data sets. A critical component of Apache Arrow is its in-memory columnar format, a standardized, language-agnostic specification for representing structured, table-like datasets in-memory.
 
-
+apache arrow filght: https://arrow.apache.org/docs/format/FlightSql.html#    
+java客户端: https://github.com/apache/arrow/blob/dfca6a704ad7e8e87e1c8c3d0224ba13b25786ea/java/flight/flight-sql/src/main/java/org/apache/arrow/flight/sql/FlightSqlClient.java
 
 
 
@@ -285,6 +286,6 @@ OpenId 实现SSO
 
 
 
-https://docs.dremio.com/software/developing-client-apps/arrow-flight/
+https://docs.dremio.com/software/rest-api/catalog/post-catalog-id/
 
 
