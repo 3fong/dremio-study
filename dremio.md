@@ -270,6 +270,12 @@ Both are part of Apache Arrow, an open-source software development platform for 
 apache arrow filght: https://arrow.apache.org/docs/format/FlightSql.html#    
 java客户端: https://github.com/apache/arrow/blob/dfca6a704ad7e8e87e1c8c3d0224ba13b25786ea/java/flight/flight-sql/src/main/java/org/apache/arrow/flight/sql/FlightSqlClient.java
 
+客户端示例代码未正常查询到数据:
+
+代码地址: git@git.zhlh6.cn:dremio-hub/arrow-flight-sql-clients.git
+
+> java -jar flight-sql-sample-client-application-4ecbafe.jar -host 10.6.240.245 -port 31010 -username nun -password ll123456 -command GetTables -schema INFORMATION_SCHEMA
+
 
 
 ### 扩展阅读
