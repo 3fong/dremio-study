@@ -292,6 +292,6 @@ OpenId 实现SSO
 
 
 
-https://docs.dremio.com/software/rest-api/catalog/post-catalog-id/
+https://docs.dremio.com/software/rest-api/jobs/get-job/
 
 
