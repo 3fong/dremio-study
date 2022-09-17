@@ -257,8 +257,6 @@ profile_attempt_0.json – This file helps with troubleshooting out of memory an
 
 Data Reflections are maintained in a high-performance columnar representation based on Apache Parquet and Apache Arrow, utilizing advanced compression techniques such as dictionary encoding, run-length encoding, and delta encoding.
 
-系统反射表:select * from sys.reflections
-
 - dremio查询核心技术: Apache Arrow Flight
 
 Apache Arrow Flight is a general-purpose, client-server framework for simplifying high-performance transportation of large datasets over network interfaces.
@@ -276,7 +274,14 @@ java客户端: https://github.com/apache/arrow/blob/dfca6a704ad7e8e87e1c8c3d0224
 
 > java -jar flight-sql-sample-client-application-4ecbafe.jar -host 10.6.240.245 -port 31010 -username nun -password ll123456 -command GetTables -schema INFORMATION_SCHEMA
 
+### 数据类型
 
+Dremio supports the following SQL data types: numeric, string and binary, boolean, date and time, and semi-structured.
+
+### 系统表
+
+反射表 sys.reflections
+DESCRIBE TABLE table_name; -- 获取表字段信息
 
 ### 扩展阅读
 
